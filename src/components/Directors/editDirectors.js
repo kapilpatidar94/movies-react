@@ -3,26 +3,25 @@ import { Switch, Link, Route } from "react-router-dom";
 
 class EditDirector extends Component {
   state = {
-    singleRecord: this.props.record,
     inputValue: '',
+    directorData: this.props.record,
 }
 
 selectChange = () => {
     this.setState({
-        inputValue: this.state.singleRecord.director_name,
+        inputValue: this.state.directorData.director_name,
     })
 }
 
 changeInput = (event) => {
     this.setState({
         inputValue: event.target.value,
-        singleRecord: { ...this.state.singleRecord, ...{ director_name: event.target.value } }
+        directorData: { ...this.state.directorData, ...{ director_name: event.target.value } }
     })
 }
 
 onUpdate = () => {
-  console.log(this.state.singleRecord);
-    this.props.onUpdateApi(this.state.singleRecord);
+    this.props.onEditItem(this.state.directorData);
 }
 
   render() {
@@ -32,15 +31,10 @@ onUpdate = () => {
           <Link to="/directors">
             <button className="close-button">X</button>
           </Link>
-          <select className="selection" required onChange={this.selectChange}>
-            <option value="0" selected disabled>
-              select
-            </option>
-            <option value="name">Name</option>
-          </select>
+          
+          <label>Name</label>
           <input
             type="text"
-            className="d-input"
             value={this.state.inputValue}
             placeholder="Enter here..."
             onChange={this.changeInput}
@@ -48,7 +42,6 @@ onUpdate = () => {
           <Link to="/directors">
             <button
               type="submit"
-              className="update d-update"
               onClick={this.onUpdate}
             >
               Done

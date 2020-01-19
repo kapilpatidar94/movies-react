@@ -6,7 +6,8 @@ const home = () => {
   return (
     <div>
       <header className="App-header">
-        <input class="movies" type="button" value="Movies" />
+        <Link to={'/movies'}><input class="movies" type="button" value="Movies" />
+        </Link>
         <Link to={'/directors'}><input class="directors" type="button" value="Directors" />
         </Link>
       </header>

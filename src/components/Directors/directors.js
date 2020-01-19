@@ -8,9 +8,7 @@ class Directors extends Component {
   state = {
     id:0,
     data: [],
-    singleRecord: '',
-    dialogInputValue: "",
-    newRecord: "",
+    currDirector: '',
     updateId: 0
   };
 
@@ -55,7 +53,8 @@ class Directors extends Component {
       });
     this.componentDidMount();
   };
-  onUpdate = async event => {
+
+  onEdit = async event => {
 
     const id = event.target.parentElement.parentElement.parentElement.getAttribute(
       "position"
@@ -63,17 +62,16 @@ class Directors extends Component {
     await this.setState({
       updateId:id,
     });
-    console.log(this.state.updateId)
     await fetch(`http://localhost:8080/api/directors/${id}`)
       .then(res => res.json())
       .then(data => {
         this.setState({
-          singleRecord: data[0]
+          currDirector: data[0]
         });
       });
      
   };
-  onUpdateApi = async data => {
+  onEditItem = async data => {
       const id = this.state.updateId;
     await fetch(`http://localhost:8080/api/directors/${id}`, {
       method: "PUT",
@@ -84,15 +82,10 @@ class Directors extends Component {
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(data => {
-        console.log(data);
-      })
       .catch(error => {
         console.log(error);
       });
-    this.setState({
-      dialogInputValue: ""
-    });
+    
     this.componentDidMount();
   };
 
@@ -112,11 +105,9 @@ class Directors extends Component {
         </Switch>
 
         <DirectorsItem directors={this.state.data} delete={this.deleteClick}
-        onUpdateApi ={this.onUpdateApi}
-        onUpdate = {this.onUpdate}
-        record={this.state.singleRecord}/>
-        
-
+        onEditItem ={this.onEditItem}
+        onEdit = {this.onEdit}
+        record={this.state.currDirector}/>
         
       </div>
     );

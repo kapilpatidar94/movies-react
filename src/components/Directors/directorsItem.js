@@ -3,11 +3,7 @@ import { Switch, Link, Route } from "react-router-dom";
 import EditDirector from "./editDirectors";
 
 class DirectorsItem extends Component {
-  state = {
-    singleRecord: "",
-    id: 0
-  };
-
+  
   render() {
     return (
       <div className="directors-container">
@@ -23,7 +19,7 @@ class DirectorsItem extends Component {
             </div>
             <div className="buttons">
               <Link to={`/directors/${element.id}/edit`}>
-                <button className="edit" onClick={this.props.onUpdate}>
+                <button className="edit" onClick={this.props.onEdit}>
                   Edit
                 </button>
               </Link>
@@ -33,7 +29,7 @@ class DirectorsItem extends Component {
                   component={() => (
                     <EditDirector
                       record={this.props.records}
-                      onUpdateApi={this.props.onUpdateApi}
+                      onEditItem={this.props.onEditItem}
                       DirId={element.id}
                     />
                   )}
