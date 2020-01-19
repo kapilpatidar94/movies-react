@@ -3,12 +3,13 @@ import { Switch, Link, Route } from "react-router-dom";
 import "../../App.css";
 import DirectorsItem from "./directorsItem";
 import AddDirector from "./addDirector";
+// import DirectorById from "./DirectorById";
 
 class Directors extends Component {
   state = {
-    id:0,
+    id: 0,
     data: [],
-    currDirector: '',
+    currDirector: "",
     updateId: 0
   };
 
@@ -47,20 +48,19 @@ class Directors extends Component {
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .catch(err => {
+      .then(res => res.json())
+      .catch(err => {
         console.log(err);
       });
     this.componentDidMount();
   };
 
   onEdit = async event => {
-
     const id = event.target.parentElement.parentElement.parentElement.getAttribute(
       "position"
     );
     await this.setState({
-      updateId:id,
+      updateId: id
     });
     await fetch(`http://localhost:8080/api/directors/${id}`)
       .then(res => res.json())
@@ -69,10 +69,9 @@ class Directors extends Component {
           currDirector: data[0]
         });
       });
-     
   };
   onEditItem = async data => {
-      const id = this.state.updateId;
+    const id = this.state.updateId;
     await fetch(`http://localhost:8080/api/directors/${id}`, {
       method: "PUT",
       headers: {
@@ -85,7 +84,7 @@ class Directors extends Component {
       .catch(error => {
         console.log(error);
       });
-    
+
     this.componentDidMount();
   };
 
@@ -93,7 +92,7 @@ class Directors extends Component {
     return (
       <div>
         <h1>All Directors</h1>
-      
+
         <Link to={"/directors/add"}>
           <button className="add-directiors">Add Director</button>
         </Link>
@@ -104,11 +103,13 @@ class Directors extends Component {
           />
         </Switch>
 
-        <DirectorsItem directors={this.state.data} delete={this.deleteClick}
-        onEditItem ={this.onEditItem}
-        onEdit = {this.onEdit}
-        record={this.state.currDirector}/>
-        
+        <DirectorsItem
+          directors={this.state.data}
+          delete={this.deleteClick}
+          onEditItem={this.onEditItem}
+          onEdit={this.onEdit}
+          record={this.state.currDirector}
+        />
       </div>
     );
   }

@@ -76,7 +76,7 @@
   top: 0;
   left: 0;
 }
-.popup-edit-container{
+.popup-edit-container, .popup-singleDirector-container{
   position: fixed;
   background: rgb(0, 0, 0, 0.02);
   width: 100%;
@@ -84,6 +84,7 @@
   top: 0;
   left: 0;
 }
+
 .popup {
   width: 50%;
   height: 50%;
