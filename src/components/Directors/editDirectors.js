@@ -1,28 +1,31 @@
 import React, { Component } from "react";
-import { Switch, Link, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class EditDirector extends Component {
   state = {
-    inputValue: '',
-    directorData: this.props.record,
-}
+    inputValue: "",
+    directorData: this.props.record
+  };
 
-selectChange = () => {
+  selectChange = () => {
     this.setState({
-        inputValue: this.state.directorData.director_name,
-    })
-}
+      inputValue: this.state.directorData.director_name
+    });
+  };
 
-changeInput = (event) => {
+  changeInput = event => {
     this.setState({
-        inputValue: event.target.value,
-        directorData: { ...this.state.directorData, ...{ director_name: event.target.value } }
-    })
-}
+      inputValue: event.target.value,
+      directorData: {
+        ...this.state.directorData,
+        ...{ director_name: event.target.value }
+      }
+    });
+  };
 
-onUpdate = () => {
+  onUpdate = () => {
     this.props.onEditItem(this.state.directorData);
-}
+  };
 
   render() {
     return (
@@ -31,7 +34,7 @@ onUpdate = () => {
           <Link to="/directors">
             <button className="close-button">X</button>
           </Link>
-          
+
           <label>Name</label>
           <input
             type="text"
@@ -40,11 +43,8 @@ onUpdate = () => {
             onChange={this.changeInput}
           />
           <Link to="/directors">
-            <button
-              type="submit"
-              onClick={this.onUpdate}
-            >
-              Done
+            <button type="submit" onClick={this.onUpdate}>
+              Change
             </button>
           </Link>
         </div>

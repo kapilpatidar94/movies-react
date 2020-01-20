@@ -91,6 +91,8 @@ class Directors extends Component {
   render() {
     return (
       <div>
+        <Link to={"/"}><div class="left">Go Back</div></Link>
+        <Link to={"/movies"}><div class="right">Go to Movie</div></Link>
         <h1>All Directors</h1>
 
         <Link to={"/directors/add"}>

@@ -10,9 +10,10 @@ class MoviesItem extends Component {
       <div className="movies-containers">
         {this.props.movies.map((data, index) => (
           <div key={index} className="movies-cards" position={data.rank}>
-            <div style={{ textAlign: "center", fontSize: 24 }}>
+            <Link to={`/movie/${data.rank}`}><div style={{ textAlign: "center", fontSize: 24 }}>
               <b>{data.title}</b>
             </div>
+            </Link>
             <div>
               <b>Description: </b>
               {data.description}
@@ -54,23 +55,27 @@ class MoviesItem extends Component {
             </div>
             <div>
               <Link to={`/movies/${data.rank}/edit`}>
-                <button>Edit</button>
+                <button onClick={this.props.onEdit}>Edit</button>
               </Link>
-              <Switch>
+              
+              <button onClick={this.props.deleteMovies}>Delete</button>
+            </div>
+          </div>
+        ))
+        
+        }
+        <Switch>
                 <Route
                   path="/movies/:id/edit"
                   component={() => (
                     <EditMovies
                       record={this.props.records}
                       onEditItem={this.props.onEditItem}
+                      parentState={this.props.parentState}
                     />
                   )}
                 />
               </Switch>
-              <button onClick={this.props.deleteMovies}>Delete</button>
-            </div>
-          </div>
-        ))}
       </div>
     );
   }
